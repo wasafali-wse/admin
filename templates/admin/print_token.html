@@ -1,0 +1,97 @@
+
+
+
+
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Print Invoice</title>
+    <style>
+        * {
+            font-size: 16px;
+            font-family: 'Arial', sans-serif;
+        }
+
+        td,
+        th,
+        tr,
+        table {
+            border-top: 1px solid black;
+            border-collapse: collapse;
+        }
+
+        td.description,
+        th.description {
+            width: 75px;
+            max-width: 75px;
+        }
+
+        td.quantity,
+        th.quantity {
+            width: 40px;
+            max-width: 40px;
+            word-break: break-all;
+        }
+
+        td.price,
+        th.price {
+            width: 40px;
+            max-width: 40px;
+            word-break: break-all;
+        }
+
+        .centered {
+            text-align: center;
+            align-content: center;
+        }
+
+        .ticket {
+            width: 300px;
+            max-width: 300px;
+        }
+
+        img {
+            max-width: inherit;
+            width: inherit;
+        }
+
+        @media print {
+            .hidden-print,
+            .hidden-print * {
+                display: none !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="ticket">
+        <img src="{% static 'img/logo.png' %}" alt="Logo">
+        <p class="centered">Hno 1118,Sec A/3,Saeedabad,
+            <br>Baldia Town, Karachi,
+            <br>0313-8163302,0333-2278859</p>
+            <h1 class="centered">SAEEDABAD BRANCH</h1>
+        <h2>Token {{token.id}} CustomerID {{token.customer.id}}</h2>
+        <p><strong>Customer:</strong> {{ token.customer.name }}</p>
+        <p><strong>Phone:</strong> {{ token.customer.contact }}</p>
+        <p><strong>Date:</strong> {{ token.date }}</p>
+        <table style="width:100%; border-collapse: collapse; margin-top: 10px;" border="1">
+        
+        
+        <tr>
+            <th>Description</th>
+            <td>{{ token.description}}</td>
+        </tr>
+        
+        </table>
+        <p class="centered">Thanks we glad to serve you.
+            <br>WAHEEDSONS ENGINEERING</p>
+    </div>
+    
+    <script>
+        window.print();
+    </script>
+</body>
+
+
+</html>

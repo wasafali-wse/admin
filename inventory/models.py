@@ -18,6 +18,7 @@ class Token(models.Model):
 
 class Invoice(models.Model):
     STATUS_CHOICES = [
+        ('Checking', 'Checking'),
         ('Pending', 'Pending'),
         ('Repairing', 'Repairing'),
         ('Return', 'Return'),

@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-q+7ja@jl&=&8g-@i2-v8#z)sb-xn!9lb(ndd-by5&psm#m-ph9
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']  # Change this to your domain or IP address in production
 
 
 # Application definition
@@ -135,7 +135,7 @@ JAZZMIN_SETTINGS = {
     "welcome_sign": "Welcome to SHOP MASTER Admin",
     "copyright": "waheesdsons engineering",
     "site_logo": "../static/img/colored.png",
-
+    "admin_search_fields": ["id","name", "contact"],
 }
     
     

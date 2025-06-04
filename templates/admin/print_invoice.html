@@ -67,10 +67,10 @@
             <br>Baldia Town, Karachi,
             <br>0313-8163302,0333-2278859</p>
         <h1 class="centered">SAEEDABAD BRANCH</h1>
-        <h2 class="centered">INVOICE ID {{invoice.id}} CUSTOMER ID {{invoice.customer.id}}</h2>
-        <p><strong>Customer:</strong> {{ invoice.customer.name }}</p>
-        <p><strong>Contact:</strong> {{ invoice.customer.contact }}</p>
-        <p><strong>Date:</strong> {{ invoice.date }}</p>
+        <h2 class="centered">INVOICE ID INV00{{invoice.id}} CUSTOMER ID CS00{{invoice.customer.id}}</h2>
+        <p><strong>Customer:</strong> {{ invoice.customer.name }}<br>
+        <strong>Contact:</strong> {{ invoice.customer.contact }}<br>
+        <strong>Date:</strong> {{ invoice.date }}</p>
 
         <table style="width:100%; border-collapse: collapse; margin-top: 10px;" border="1">
         
@@ -109,7 +109,10 @@
         </tr>
         </table>
         <p class="centered">Thanks we glad to serve you.
-            <br>WAHEEDSONS ENGINEERING</p>
+        <br>Developed by:
+        <br>WAHEEDSONS ENGINEERING
+        <br>waheedsons-engineering.com
+        </p>
     </div>
     
     <script>

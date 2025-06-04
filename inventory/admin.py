@@ -46,7 +46,7 @@ class InvoiceInline(admin.TabularInline):
 class CustomerAdmin(admin.ModelAdmin):
 
     list_filter = ('date', 'name', 'contact')
-    search_fields = ('name', 'contact')
+    search_fields = ('id','name', 'contact')
     list_display = ('id', 'date', 'name', 'contact')
     inlines = [TokenInline, InvoiceInline]
 

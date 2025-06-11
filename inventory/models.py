@@ -1,5 +1,7 @@
 from django.db import models
 from django.utils import timezone
+import psycopg2
+
 class Customer(models.Model):
     date = models.DateField()
     name = models.CharField(max_length=100)

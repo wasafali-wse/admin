@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% block title %}Customer Overview{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">Customer: {{ customer.name }}</h1>
+
+<div class="row">
+    <!-- Invoices Section -->
+    <div class="col-md-6 mb-4">
+        <div class="card shadow-sm h-100">
+            <div class="card-header bg-primary text-white">
+                <h4 class="mb-0">Invoices</h4>
+            </div>
+            <div class="card-body">
+                {% if invoices %}
+                    <ul class="list-group list-group-flush">
+                        {% for invoice in invoices %}
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <div>
+                                    <strong>ID:</strong> {{ invoice.id }}<br>
+                                    <strong>Item:</strong> {{ invoice.item }}<br>
+                                    <strong>Qty:</strong> {{ invoice.qty }}<br>
+                                    <strong>Amount:</strong> {{ invoice.gross_amount }}
+                                </div>
+                                <a href="{% url 'customer_invoice_detail' customer.id invoice.id %}" class="btn btn-sm btn-outline-primary">View</a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <p>No invoices found.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <!-- Tokens Section -->
+    <div class="col-md-6 mb-4">
+        <div class="card shadow-sm h-100">
+            <div class="card-header bg-success text-white">
+                <h4 class="mb-0">Tokens</h4>
+            </div>
+            <div class="card-body">
+                {% if tokens %}
+                    <ul class="list-group list-group-flush">
+                        {% for token in tokens %}
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <div>
+                                    <strong>ID:</strong> {{ token.id }}<br>
+                                    <strong>Description:</strong> {{ token.description }}<br>
+                                    <strong>Date:</strong> {{ token.date }}
+                                </div>
+                                <a href="{% url 'customer_token_detail' customer.id token.id %}" class="btn btn-sm btn-outline-success">View</a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <p>No tokens found.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

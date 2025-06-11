@@ -82,6 +82,20 @@ DATABASES = {
     }
 }
 
+#DATABASE_URL = "postgresql://postgres:#waheed1118#supabase#@db.fimishuibvknjcrioajz.supabase.co:5432/postgres"
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'postgres',
+#         'USER': 'postgres',
+#         'PASSWORD': '#waheed1118#supabase#',
+#         'HOST': 'db.fimishuibvknjcrioajz.supabase.co',
+#         'PORT': '5432',
+#     }
+# }
+
+
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators

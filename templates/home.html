@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+
+{% block title %}Home - Welcome to Shop Master{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<div class="bg-light py-5">
+  <div class="container text-center">
+    <h1 class="display-4 font-weight-bold mb-3">Welcome to Shop Master</h1>
+    <p class="lead mb-4">
+      Streamline your customer management, generate tokens, and create invoices effortlessly. 
+      Empower your business with our intuitive platform.
+    </p>
+    <div class="d-flex justify-content-center gap-3 flex-wrap">
+      {% comment %} <a href="{% url 'customer_list' %}" class="btn btn-success btn-lg px-4 py-3">
+        Get Started
+      </a> {% endcomment %}
+      {% comment %} <a href="{% url 'about' %}" class="btn btn-outline-primary btn-lg px-4 py-3">
+        Learn More
+      </a> {% endcomment %}
+      <a href="{% url 'admin:index' %}" class="btn btn-primary btn-lg px-4 py-3">
+        Admin Panel
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- Features Section -->
+<div class="container my-5">
+  <div class="row text-center mb-4">
+    <div class="col-md-4">
+      <div class="card shadow-sm h-100">
+        <div class="card-body">
+          <div class="mb-3">
+            <i class="fas fa-users fa-3x text-primary"></i>
+          </div>
+          <h5 class="card-title">Customer Management</h5>
+          <p class="card-text">Keep track of all your customers with ease and organize your contacts effectively.</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card shadow-sm h-100">
+        <div class="card-body">
+          <div class="mb-3">
+            <i class="fas fa-key fa-3x text-success"></i>
+          </div>
+          <h5 class="card-title">Token Generation</h5>
+          <p class="card-text">Generate secure tokens quickly for authentication, access, or promotions.</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card shadow-sm h-100">
+        <div class="card-body">
+          <div class="mb-3">
+            <i class="fas fa-file-invoice-dollar fa-3x text-warning"></i>
+          </div>
+          <h5 class="card-title">Invoice Management</h5>
+          <p class="card-text">Create, send, and manage invoices seamlessly to keep your business financially healthy.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Call to Action -->
+<div class="bg-primary text-white py-4">
+  <div class="container text-center">
+    <h2 class="mb-3">Ready to Boost Your Business?</h2>
+    <p class="mb-4">Join thousands of users who trust our platform for efficient management.</p>
+    {% comment %} <a href="{% url 'register' %}" class="btn btn-light btn-lg">Sign Up Now</a> {% endcomment %}
+  </div>
+</div>
+{% endblock %}

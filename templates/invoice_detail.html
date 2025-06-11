@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}Customer Details{% endblock %}
+
+{% block content %}
+<a href="{% url 'customer_overview' customer.id %}" class="btn btn-secondary mb-3">&larr; Back to Customer</a>
+
+<h1 class="mb-4">Customer: {{ customer.name }}</h1>
+
+<div class="card p-4 shadow-sm">
+    <h4 class="mb-3">Customer Info</h4>
+    <p><strong>Contact:</strong> {{ customer.contact }}</p>
+    <p><strong>Date:</strong> {{ customer.date }}</p>
+</div>
+
+<!-- Invoice Details -->
+<div class="card p-4 shadow-sm">
+    <h4 class="mb-3">Invoice Details</h4>
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item"><strong>Invoice ID:</strong> {{ invoice.id }}</li>
+        <li class="list-group-item"><strong>Item:</strong> {{ invoice.item }}</li>
+        <li class="list-group-item"><strong>Quantity:</strong> {{ invoice.qty }}</li>
+        <li class="list-group-item"><strong>Gross Amount:</strong> {{ invoice.gross_amount }}</li>
+        <li class="list-group-item"><strong>Status:</strong> {{ invoice.status }}</li>
+        <!-- Add other invoice fields as needed -->
+    </ul>
+</div>
+{% endblock %}

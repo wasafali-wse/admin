@@ -62,23 +62,26 @@
 </head>
 <body>
     <div class="ticket">
-        <img src="{% static 'img/logo.png' %}" alt="Logo">
+        <img src="{% static 'img/logo2.png' %}" alt="Logo">
         <p class="centered">Hno 1118,Sec A/3,Saeedabad,
             <br>Baldia Town, Karachi,
-            <br>0313-8163302,0333-2278859</p>
-        <h1 class="centered">SAEEDABAD BRANCH</h1>
-        <h2 class="centered">INVOICE ID INV00{{invoice.id}} CUSTOMER ID CS00{{invoice.customer.id}}</h2>
-        <p><strong>Customer:</strong> {{ invoice.customer.name }}<br>
-        <strong>Contact:</strong> {{ invoice.customer.contact }}<br>
-        <strong>Date:</strong> {{ invoice.date }}</p>
+            <br>0313-8163302,0333-2278859
+            </br>SAEEDABAD BRANCH
+        </p>
+        
+        <p>
+            <strong>User:</strong> {{ user.username }} <br>
+            <strong>ID:</strong>CS00{{invoice.customer.id}} INV00{{invoice.id}}<br>
+
+            <strong>Customer:</strong> {{ invoice.customer.name }}<br>
+            <strong>Contact:</strong> {{ invoice.customer.contact }}<br>
+            <strong>Date:</strong> {{ invoice.date }}
+        </p>
 
         <table style="width:100%; border-collapse: collapse; margin-top: 10px;" border="1">
         
         
-        <tr>
-            <th>Name</th>
-            <td>{{ invoice.name }}</td>
-        </tr>
+        
         <tr>
             <th>Item</th>
             <td>{{ invoice.item }}</td>
@@ -87,22 +90,29 @@
             <th>Quantity</th>
             <td>{{ invoice.qty }}</td>
         </tr>
+        {% comment %} {% if invoice.status != 'Token' %} {% endcomment %}
+        {% if invoice.status != 'Token' and invoice.status != 'Claim' %}
         <tr>
             <th>Amount</th>
-            <td>{{ invoice.gross_amount }}</td>
+            <td>Rs {{ invoice.gross_amount }}/=</td>
         </tr>
         <tr>
             <th>Advance</th>
-            <td>{{ invoice.advance }}</td>
+            <td>Rs {{ invoice.advance }}/=</td>
         </tr>
         <tr>
             <th>Discount</th>
-            <td>{{ invoice.discount }}</td>
+            <td>Rs {{ invoice.discount }}/=</td>
+        </tr>
+        <tr>
+            <th>Paid</th>
+            <td>Rs {{ invoice.net_amount }}/=</td>
         </tr>
         <tr>
             <th>Balance</th>
-            <td>{{ invoice.balance }}</td>
+            <td>Rs {{ invoice.balance }}/=</td>
         </tr>
+        {% endif %}
         <tr>
             <th>Status</th>
             <td>{{ invoice.status }}</td>

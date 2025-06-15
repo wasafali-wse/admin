@@ -1,63 +1,62 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block title %}Customer Overview{% endblock %}
 
 {% block content %}
-<h1 class="mb-4">Customer: {{ customer.name }}</h1>
-
-<div class="row">
-    <!-- Invoices Section -->
-    <div class="col-md-12 mb-4">
-        <div class="card shadow-sm h-100">
-            <div class="card-header bg-primary text-white">
-                <h4 class="mb-0">Invoices</h4>
-            </div>
-            <div class="card-body">
-                {% if invoices %}
-                    <ul class="list-group list-group-flush">
-                        {% for invoice in invoices %}
-                            <li class="list-group-item d-flex justify-content-between align-items-center">
-                                <div>
-                                    <strong>ID:</strong> {{ invoice.id }}<br>
-                                    <strong>Item:</strong> {{ invoice.item }}<br>
-                                    <strong>Qty:</strong> {{ invoice.qty }}<br>
-                                    <strong>Amount:</strong> {{ invoice.gross_amount }}
-                                </div>
-                                <a href="{% url 'customer_invoice_detail' customer.id invoice.id %}" class="btn btn-sm btn-outline-primary">View</a>
-                            </li>
-                        {% endfor %}
-                    </ul>
-                {% else %}
-                    <p>No invoices found.</p>
-                {% endif %}
-            </div>
-        </div>
+<div class="text-center my-4">
+    <img src="{% static 'img/logo-bg-colored.png' %}" alt="Waheedsons Logo" height="80">
+    <div class="mt-2">
+        <a href="https://waheedsons-engineering.com" target="_blank" class="btn btn-success px-4 py-2 rounded-pill shadow">Visit Official Website</a>
     </div>
-    <!-- Tokens Section -->
-    {% comment %} <div class="col-md-6 mb-4">
-        <div class="card shadow-sm h-100">
-            <div class="card-header bg-success text-white">
-                <h4 class="mb-0">Tokens</h4>
-            </div>
-            <div class="card-body">
-                {% if tokens %}
-                    <ul class="list-group list-group-flush">
-                        {% for token in tokens %}
-                            <li class="list-group-item d-flex justify-content-between align-items-center">
-                                <div>
-                                    <strong>ID:</strong> {{ token.id }}<br>
-                                    <strong>Description:</strong> {{ token.description }}<br>
-                                    <strong>Date:</strong> {{ token.date }}
-                                </div>
-                                <a href="{% url 'customer_token_detail' customer.id token.id %}" class="btn btn-sm btn-outline-success">View</a>
-                            </li>
+</div>
+
+<a href="{% url 'home' %}" class="btn btn-outline-secondary mb-3">&larr; Back to Home</a>
+
+
+<!-- Customer Details -->
+<div class="card p-4 mb-4 shadow-sm border-0">
+    <h4 class="text-success mb-3">Customer Info</h4>
+    <p><strong>Name:</strong> {{ customer.name }}</p>
+    <p><strong>Contact:</strong> {{ customer.contact }}</p>
+    <p><strong>Date Joined:</strong> {{ customer.date }}</p>
+</div>
+
+<!-- Invoices Table -->
+<div class="card shadow border-0">
+    <div class="card-header bg-light text-success border-bottom">
+        <h4 class="mb-0">Invoices</h4>
+    </div>
+    <div class="card-body bg-white">
+        {% if invoices %}
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped">
+                    <thead class="table-success">
+                        <tr>
+                            <th>ID</th>
+                            <th>Item</th>
+                            <th>Quantity</th>
+                            <th>Amount</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for invoice in invoices %}
+                        <tr>
+                            <td>{{ invoice.id }}</td>
+                            <td>{{ invoice.item }}</td>
+                            <td>{{ invoice.qty }}</td>
+                            <td>{{ invoice.gross_amount }}</td>
+                            <td>
+                                <a href="{% url 'customer_invoice_detail' customer.id invoice.id %}" class="btn btn-outline-success btn-sm">View</a>
+                            </td>
+                        </tr>
                         {% endfor %}
-                    </ul>
-                {% else %}
-                    <p>No tokens found.</p>
-                {% endif %}
+                    </tbody>
+                </table>
             </div>
-        </div>
-    </div> {% endcomment %}
+        {% else %}
+            <p class="text-muted">No invoices found.</p>
+        {% endif %}
+    </div>
 </div>
 {% endblock %}

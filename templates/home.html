@@ -1,75 +1,84 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block title %}Home - Welcome to Shop Master{% endblock %}
 
 {% block content %}
+<!-- Logo + Visit Site Button -->
+<div class="text-center my-4">
+    <img src="{% static 'img/logo-bg-colored.png' %}" alt="Waheedsons Logo" height="80">
+    <div class="mt-3">
+        <a href="https://waheedsons-engineering.com" target="_blank" class="btn btn-success px-4 py-2 rounded-pill shadow">Visit Official Website</a>
+    </div>
+</div>
+
 <!-- Hero Section -->
-<div class="bg-light py-5">
-  <div class="container text-center">
-    <h1 class="display-4 font-weight-bold mb-3">Welcome to Shop Master</h1>
+<div class="bg-light py-5 text-center">
+  <div class="container">
+    <h1 class="display-4 text-success fw-bold mb-3 animate__animated animate__fadeInDown">Welcome to Shop Master</h1>
     <p class="lead mb-4">
-      Streamline your customer management, generate tokens, and create invoices effortlessly. 
-      Empower your business with our intuitive platform.
+      Manage customers, generate invoices, and streamline your business with our all-in-one platform.
     </p>
     <div class="d-flex justify-content-center gap-3 flex-wrap">
-      {% comment %} <a href="{% url 'customer_list' %}" class="btn btn-success btn-lg px-4 py-3">
-        Get Started
-      </a> {% endcomment %}
-      {% comment %} <a href="{% url 'about' %}" class="btn btn-outline-primary btn-lg px-4 py-3">
-        Learn More
-      </a> {% endcomment %}
-      <a href="{% url 'admin:index' %}" class="btn btn-primary btn-lg px-4 py-3">
+      <a href="{% url 'admin:index' %}" class="btn btn-success btn-lg px-4 py-3">
         Admin Panel
       </a>
+    </div>
+
+    <!-- Customer ID Quick Access -->
+    <div class="mt-5">
+      <h5 class="text-muted mb-3">Quick Access to Customer Profile</h5>
+      <form method="get" onsubmit="redirectToCustomer(event)">
+        <div class="input-group w-50 mx-auto">
+          <input type="number" id="customerID" class="form-control" placeholder="Enter Customer ID (e.g. 23)" required>
+          <button class="btn btn-outline-success" type="submit">Go</button>
+        </div>
+      </form>
+      <script>
+        function redirectToCustomer(event) {
+          event.preventDefault();
+          const id = document.getElementById('customerID').value;
+          if (id) {
+            window.location.href = `/customer00${id}/`;
+          }
+        }
+      </script>
     </div>
   </div>
 </div>
 
 <!-- Features Section -->
 <div class="container my-5">
-  <div class="row text-center mb-4">
-    <div class="col-md-4">
-      <div class="card shadow-sm h-100">
+  <div class="row text-center g-4">
+    <div class="col-md-6">
+      <div class="card shadow h-100 border-0">
         <div class="card-body">
           <div class="mb-3">
-            <i class="fas fa-users fa-3x text-primary"></i>
+            <i class="fas fa-users fa-3x text-success"></i>
           </div>
           <h5 class="card-title">Customer Management</h5>
-          <p class="card-text">Keep track of all your customers with ease and organize your contacts effectively.</p>
+          <p class="card-text">Track, manage, and organize your customers in one smart place.</p>
         </div>
       </div>
     </div>
-    <div class="col-md-4">
-      <div class="card shadow-sm h-100">
-        <div class="card-body">
-          <div class="mb-3">
-            <i class="fas fa-key fa-3x text-success"></i>
-          </div>
-          <h5 class="card-title">Token Generation</h5>
-          <p class="card-text">Generate secure tokens quickly for authentication, access, or promotions.</p>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-4">
-      <div class="card shadow-sm h-100">
+    <div class="col-md-6">
+      <div class="card shadow h-100 border-0">
         <div class="card-body">
           <div class="mb-3">
             <i class="fas fa-file-invoice-dollar fa-3x text-warning"></i>
           </div>
           <h5 class="card-title">Invoice Management</h5>
-          <p class="card-text">Create, send, and manage invoices seamlessly to keep your business financially healthy.</p>
+          <p class="card-text">Easily create and manage invoices with clear financial tracking.</p>
         </div>
       </div>
     </div>
   </div>
 </div>
 
-<!-- Call to Action -->
-<div class="bg-primary text-white py-4">
+<!-- CTA Section -->
+<div class="bg-success text-white py-5">
   <div class="container text-center">
     <h2 class="mb-3">Ready to Boost Your Business?</h2>
-    <p class="mb-4">Join thousands of users who trust our platform for efficient management.</p>
-    {% comment %} <a href="{% url 'register' %}" class="btn btn-light btn-lg">Sign Up Now</a> {% endcomment %}
+    <p class="mb-4">Join professionals who use Shop Master for smooth customer and invoice handling.</p>
   </div>
 </div>
 {% endblock %}

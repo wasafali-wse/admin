@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-q+7ja@jl&=&8g-@i2-v8#z)sb-xn!9lb(ndd-by5&psm#m-ph9
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']  # Change this to your domain or IP address in production
+ALLOWED_HOSTS = ['192.168.100.17', '0.0.0.0', '127.0.0.1']  # Change this to your domain or IP address in production
 
 
 # Application definition
@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-'inventory',
+    #'django.contrib.admindocs',
+    'inventory',
 ]
 
 MIDDLEWARE = [

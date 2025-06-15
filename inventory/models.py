@@ -3,7 +3,7 @@ from django.utils import timezone
 import psycopg2
 
 class Customer(models.Model):
-    date = models.DateField(auto_now_add=True)
+    date = models.DateTimeField(auto_now_add=True)
     name = models.CharField(max_length=100)
     contact = models.CharField(max_length=100)
 
@@ -12,7 +12,7 @@ class Customer(models.Model):
 
 class Token(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
-    date = models.DateField(auto_now_add=True)
+    date = models.DateTimeField(auto_now_add=True)
     description = models.CharField(max_length=150)
 
     def __str__(self):
@@ -33,7 +33,7 @@ class Invoice(models.Model):
     ]
 
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
-    date = models.DateField(auto_now_add=True)
+    date = models.DateTimeField(auto_now_add=True)
     qty = models.IntegerField()
     item = models.CharField(max_length=100)
     gross_amount = models.DecimalField(max_digits=10, decimal_places=2)

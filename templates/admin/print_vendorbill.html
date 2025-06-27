@@ -1,0 +1,136 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+{% comment %} <link rel="stylesheet" href="{% static 'css/print.css' %}" /> {% endcomment %}
+<title>Vendor Bill Invoice</title>
+<style>
+  @page { size: A4; margin: 20mm; }
+  body {
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+    margin: 0;
+    padding: 0;
+    width: 210mm;
+    min-height: 277mm;
+    box-sizing: border-box;
+  }
+  .invoice-box {
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+  /* Logo and header styles */
+  .header-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column;
+  }
+  .logo {
+    width: 720px; /* Adjust as needed */
+  }
+  .address {
+    flex: 1;
+    padding-left: 20px;
+  }
+  /* Vendor info and QR code flex */
+  .vendor-qr-section {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    align-items: flex-start;
+  }
+  .vendor-info {
+    display: flex;
+    flex-direction: column;
+    width: 65%;
+  }
+  .vendor-info div {
+    margin-bottom: 5px;
+  }
+  .qr-code {
+    width: 120px;
+    height: 120px;
+  }
+  /* Main image section */
+  .main-image {
+    margin-top: 20px;
+    text-align: center;
+  }
+  .main-image img {
+    width: 5in;
+    height: 5in;
+    object-fit: contain;
+  }
+  /* Branding footer */
+  .branding {
+    width: 100%;
+    text-align: center;
+    margin-top: 20px;
+    font-weight: bold;
+    position:absolute;
+    bottom: 20px;
+  }
+</style>
+</head>
+<body>
+<div class="invoice-box">
+
+  <!-- Logo and Address -->
+  <div class="header-top">
+    <img src="{% static 'img/logo-bg-colored.png' %}" alt="Logo" class="logo" />
+    <div class="address">
+      <h3>Plot No 1118, Sector A/3,Saeedabad,Baldia Town, Karachi, Zip75760</br>
+      Phone: 03138163302 0333227859 ,website: waheedsons-engineering.com</h3>
+    </div>
+  </div>
+
+  <!-- Bill Info -->
+  <div class="vendor-qr-section">
+    <div >
+    <p><strong>Bill ID:</strong> BL00{{ vendorbill.id }}<strong>Vendor ID:</strong>VN00{{ vendorbill.vendor.id }}</br>
+    <strong>Date:</strong> {{ vendorbill.date }}</br>
+    <strong>Vendor:</strong> {{ vendorbill.vendor.name }}</br>
+    <strong>Contact:</strong> {{ vendorbill.vendor.contact }}</br>
+    <strong>Account:</strong> {{ vendorbill.vendor.bank_name }}</br>
+    <strong>Amount:</strong> {{ vendorbill.gross_amount }}</br>
+    <strong>Status:</strong> {{ vendorbill.status }}</p>
+    </div>
+    <div> 
+      <img src="{% static 'img/website-qr.jpeg' %}" alt="QR Code" class="qr-code" />
+    </div>
+  </div>
+
+  <!-- Vendor details & QR code -->
+  <div class="vendor-qr-section">
+  </div>
+
+  <!-- Main Image (6x6 inch) -->
+  <div class="main-image">
+    {% if vendorbill.image %}
+      <img src="{{ vendorbill.image.url }}" alt="Bill Image" />
+    {% else %}
+      <p>No image available</p>
+    {% endif %}
+  </div>
+
+  <!-- Branding / Footer -->
+  <div class="branding">
+    Software developed by WAHEEDSONS ENGINEERING
+  </div>
+
+</div>
+<script>
+    window.onload = function() {
+        window.print();
+    };
+
+    window.onafterprint = function() {
+        window.close();
+    };
+</script>
+</body>
+</html>

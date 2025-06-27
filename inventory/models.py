@@ -1,7 +1,7 @@
 from django.db import models
 from django.utils import timezone
 import psycopg2
-
+from django.contrib.auth.models import User
 class Customer(models.Model):
     date = models.DateTimeField(auto_now_add=True)
     name = models.CharField(max_length=100)
@@ -46,3 +46,39 @@ class Invoice(models.Model):
 
     def __str__(self):
         return f"Invoice {self.id} for {self.customer.name}"
+
+
+class Vendors(models.Model):
+    date = models.DateTimeField(auto_now_add=True)
+    name = models.CharField(max_length=100)
+    contact = models.CharField(max_length=100)
+    bank_name = models.CharField(max_length=100, blank=True, null=True)
+    def __str__(self):
+        return self.name
+class VendorBill(models.Model):
+    STATUS_CHOICES = [
+        ('Unpaid', 'Unpaid'),
+        ('Paid', 'Paid'),
+        ('Return', 'Return'),
+        ('Claim', 'Claim'),
+    ]
+    vendor = models.ForeignKey(Vendors, on_delete=models.CASCADE)
+    date = models.DateTimeField(auto_now_add=True)
+    
+    gross_amount = models.DecimalField(max_digits=10, decimal_places=2)
+    image = models.ImageField(upload_to='vendor_bills/', blank=True, null=True)
+    
+    status = models.CharField(max_length=10, choices=STATUS_CHOICES)
+    def __str__(self):
+        return f"Vendor Bill {self.id} for {self.vendor.name}"
+
+
+class MarketItem(models.Model):
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, blank=True, null=True)
+    date = models.DateTimeField(auto_now_add=True)
+    item = models.CharField(max_length=100)
+    qty = models.IntegerField()
+    supplier = models.CharField(max_length=100, blank=True, null=True)
+
+    def __str__(self):
+        return f"{self.user} - {self.item}"

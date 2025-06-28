@@ -102,7 +102,7 @@ class CustomerAdmin(admin.ModelAdmin):
 class VendorBillInline(admin.TabularInline):
     model = VendorBill
     extra = 1
-    fields = ('display_id','date',  'gross_amount','image', 'status','print_button')
+    fields = ('display_id','date',  'gross_amount','image', 'bank_slip', 'status','print_button')
     readonly_fields = ('display_id','date','print_button')
 
     def display_id(self, obj):

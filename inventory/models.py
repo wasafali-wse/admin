@@ -67,7 +67,7 @@ class VendorBill(models.Model):
     
     gross_amount = models.DecimalField(max_digits=10, decimal_places=2)
     image = models.ImageField(upload_to='vendor_bills/', blank=True, null=True)
-    
+    bank_slip = models.ImageField(upload_to='vendor_bank_slips/', blank=True, null=True)
     status = models.CharField(max_length=10, choices=STATUS_CHOICES)
     def __str__(self):
         return f"Vendor Bill {self.id} for {self.vendor.name}"

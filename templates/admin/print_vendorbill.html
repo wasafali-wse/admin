@@ -27,14 +27,15 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    flex-direction: column;
+    flex-direction: column; /* Changed to column for logo then address */
   }
   .logo {
     width: 720px; /* Adjust as needed */
   }
   .address {
     flex: 1;
-    padding-left: 20px;
+    /* padding-left: 20px; Removed as it's now column layout */
+    text-align: center; /* Center the address text */
   }
   /* Vendor info and QR code flex */
   .vendor-qr-section {
@@ -55,15 +56,24 @@
     width: 120px;
     height: 120px;
   }
-  /* Main image section */
+  /* Main image section - Adjusted for two images */
   .main-image {
     margin-top: 20px;
     text-align: center;
+    display: flex; /* Use flexbox to arrange images */
+    flex-direction: row; /* Images side by side */
+    flex-wrap: wrap; /* Allow images to wrap if not enough space */
+    justify-content: center; /* Center images horizontally */
+    align-items: flex-start; /* Align images at the top if different heights */
+    gap: 10px; /* Space between images */
   }
   .main-image img {
-    width: 5in;
-    height: 5in;
+    max-width: 4.8in; /* Adjust width to allow two images side-by-side with gap within 5in total */
+    max-height: 5in; /* Keep height constraint */
+    width: auto; /* Allow width to scale */
+    height: auto; /* Allow height to scale */
     object-fit: contain;
+    border: 1px solid #eee; /* Optional: Add a border for visual separation */
   }
   /* Branding footer */
   .branding {
@@ -71,15 +81,16 @@
     text-align: center;
     margin-top: 20px;
     font-weight: bold;
-    position:absolute;
-    bottom: 20px;
+    position: absolute; /* Changed to absolute to stick to bottom of A4 page */
+    bottom: 20mm; /* 20mm from the bottom margin */
+    left: 0;
+    right: 0;
   }
 </style>
 </head>
 <body>
 <div class="invoice-box">
 
-  <!-- Logo and Address -->
   <div class="header-top">
     <img src="{% static 'img/logo-bg-colored.png' %}" alt="Logo" class="logo" />
     <div class="address">
@@ -88,11 +99,10 @@
     </div>
   </div>
 
-  <!-- Bill Info -->
   <div class="vendor-qr-section">
     <div >
     <p><strong>Bill ID:</strong> BL00{{ vendorbill.id }}<strong>Vendor ID:</strong>VN00{{ vendorbill.vendor.id }}</br>
-    <strong>Date:</strong> {{ vendorbill.date }}</br>
+    <strong>Date:</strong> {{ vendorbill.date|date:"F d, Y H:i" }}</br> {# Added date formatting #}
     <strong>Vendor:</strong> {{ vendorbill.vendor.name }}</br>
     <strong>Contact:</strong> {{ vendorbill.vendor.contact }}</br>
     <strong>Account:</strong> {{ vendorbill.vendor.bank_name }}</br>
@@ -104,20 +114,30 @@
     </div>
   </div>
 
-  <!-- Vendor details & QR code -->
-  <div class="vendor-qr-section">
-  </div>
-
-  <!-- Main Image (6x6 inch) -->
   <div class="main-image">
     {% if vendorbill.image %}
-      <img src="{{ vendorbill.image.url }}" alt="Bill Image" />
+      <div>
+        <h4>Vendor Bill Image:</h4>
+        <img src="{{ vendorbill.image.url }}" alt="Bill Image" />
+      </div>
     {% else %}
-      <p>No image available</p>
+      <div>
+        <p>No vendor bill image available</p>
+      </div>
+    {% endif %}
+
+    {% if vendorbill.bank_slip %}
+      <div>
+        <h4>Bank Slip Image:</h4>
+        <img src="{{ vendorbill.bank_slip.url }}" alt="Bank Slip Image" />
+      </div>
+    {% else %}
+      <div>
+        <p>No bank slip image available</p>
+      </div>
     {% endif %}
   </div>
 
-  <!-- Branding / Footer -->
   <div class="branding">
     Software developed by WAHEEDSONS ENGINEERING
   </div>
@@ -129,7 +149,8 @@
     };
 
     window.onafterprint = function() {
-        window.close();
+        // Optional: Close the window after printing, though sometimes browsers block this.
+        window.close(); 
     };
 </script>
 </body>

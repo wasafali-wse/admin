@@ -25,24 +25,7 @@
     </div>
 
     <!-- Customer ID Quick Access -->
-    <div class="mt-5">
-      <h5 class="text-muted mb-3">Quick Access to Customer Profile</h5>
-      <form method="get" onsubmit="redirectToCustomer(event)">
-        <div class="input-group w-50 mx-auto">
-          <input type="number" id="customerID" class="form-control" placeholder="Enter Customer ID (e.g. 23)" required>
-          <button class="btn btn-outline-success" type="submit">Go</button>
-        </div>
-      </form>
-      <script>
-        function redirectToCustomer(event) {
-          event.preventDefault();
-          const id = document.getElementById('customerID').value;
-          if (id) {
-            window.location.href = `/customer00${id}/`;
-          }
-        }
-      </script>
-    </div>
+    
   </div>
 </div>
 

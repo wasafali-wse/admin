@@ -60,7 +60,7 @@ def print_vendorbill_view(request, vendorbill_id):
 class InvoiceInline(admin.TabularInline):
     model = Invoice
     extra = 1
-    readonly_fields = ('display_id', 'print_button',)
+    readonly_fields = ('display_id', 'print_button','date')
     fields = ('display_id','date','item', 'qty', 'gross_amount', 'advance', 'discount', 'balance', 'net_amount','status', 'print_button')
 
     def display_id(self, obj):

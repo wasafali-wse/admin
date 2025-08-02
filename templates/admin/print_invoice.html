@@ -75,7 +75,8 @@
 
             <strong>Customer:</strong> {{ invoice.customer.name }}<br>
             <strong>Contact:</strong> {{ invoice.customer.contact }}<br>
-            <strong>Date:</strong> {{ invoice.date }}
+            <strong>Entry Date:</strong> {{ invoice.date }}
+            <strong>Print Date:</strong> <span id="print-date"></span>
         </p>
 
         <table style="width:100%; border-collapse: collapse; margin-top: 10px;" border="1">
@@ -133,6 +134,19 @@
         window.onafterprint = function() {
             window.close();
         };
+        
+    </script>
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const dateSpan = document.getElementById('print-date');
+        const now = new Date();
+
+        const options = { day: 'numeric', month: 'long', year: 'numeric', 
+                        hour: 'numeric', minute: 'numeric' };
+        const formattedDate = now.toLocaleString(undefined, options);
+
+        dateSpan.textContent = formattedDate;
+    });
     </script>
 </body>
 

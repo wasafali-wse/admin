@@ -61,7 +61,7 @@ class InvoiceInline(admin.TabularInline):
     model = Invoice
     extra = 1
     readonly_fields = ('display_id', 'print_button',)
-    fields = ('display_id','item', 'qty', 'gross_amount', 'advance', 'discount', 'balance', 'net_amount','status', 'print_button')
+    fields = ('display_id','date','item', 'qty', 'gross_amount', 'advance', 'discount', 'balance', 'net_amount','status', 'print_button')
 
     def display_id(self, obj):
         return obj.id
